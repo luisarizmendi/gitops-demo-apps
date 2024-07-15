@@ -8,12 +8,10 @@ spec:
   source:
     repoURL: 'https://github.com/luisarizmendi/gitops-demo-apps'
     targetRevision: HEAD
-    path: apps/people-counter/charts
+    path: apps/people-counter/charts/people-counter-hello
     helm:
       valueFiles:
         - environments/cloud/aws1.yml
-    directory:
-      recurse: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: people-counter
