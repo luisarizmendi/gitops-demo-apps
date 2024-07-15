@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: people-counter
+  namespace: multicloud-gitops-hub
+spec:
+  project: hub
+  source:
+    repoURL: 'https://github.com/luisarizmendi/gitops-demo-apps'
+    targetRevision: HEAD
+    path: apps/people-counter/charts/people-counter-hello
+    helm:
+      valueFiles:
+        - environments/cloud/aws1.yml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: people-counter
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
